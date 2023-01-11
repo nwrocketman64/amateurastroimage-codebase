@@ -1,0 +1,29 @@
+{
+  "name": "amateurastroimage-codebase",
+  "version": "2.0.0",
+  "description": "This is the codebase for the new version of the Amateur Astro Image website build using Express JS and now running off of an SQL based database.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwrocketman64/amateurastroimage-codebase.git"
+  },
+  "author": "Nathan Webb",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/nwrocketman64/amateurastroimage-codebase/issues"
+  },
+  "homepage": "https://github.com/nwrocketman64/amateurastroimage-codebase#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "custom-env": "^2.0.1",
+    "express": "^4.18.2",
+    "nunjucks": "^3.2.3",
+    "nunjucks-date": "^1.5.0"
+  }
+}

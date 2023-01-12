@@ -8,6 +8,8 @@ require('custom-env').env('process');
 const express = require('express');
 const nunjucks = require('nunjucks');
 const nunjucksDate = require('nunjucks-date');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 
 // Import the error controller.
 const errorController = require('./controllers/error');
@@ -18,6 +20,24 @@ const siteRoutes = require('./routes/site');
 // Create the web app.
 const app = express();
 const PORT = process.env.PORT || 5000
+
+// Create the session store.
+const sessionStore = new MySQLStore({
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
+    database: process.env.DATABASE,
+});
+
+// Configure Sessions.
+app.use(session({
+    key: process.env.SECRET_KEY,
+    secret: process.env.SESSION_SECRET,
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+}));
 
 // Configure nunjucksDate.
 nunjucksDate.setDefaultFormat("MMMM Do, YYYY, h:mm a");

@@ -1,6 +1,6 @@
 // Import the need libraries.
 const express = require('express');
-const { check, body } = require('express-validator');
+const { body } = require('express-validator');
 
 // Import the shop controller
 const siteController = require('../controllers/site');

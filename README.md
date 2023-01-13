@@ -16,5 +16,14 @@ CREATE TABLE astro_image.requests (
   last_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   comment TEXT NOT NULL,
+  date DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (request_id)
+);
+
+Users Table
+CREATE TABLE astro_image.users (
+  user_id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  PRIMARY KEY (user_id)
 );

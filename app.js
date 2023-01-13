@@ -16,6 +16,7 @@ const errorController = require('./controllers/error');
 
 // Import the routes.
 const siteRoutes = require('./routes/site');
+const authRoutes = require('./routes/auth');
 
 // Create the web app.
 const app = express();
@@ -59,6 +60,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // The following routes for the website.
+app.use(authRoutes);
 app.use(siteRoutes);
 
 // Code for the 404 and 500.

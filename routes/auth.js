@@ -1,6 +1,6 @@
 // Import the need libraries.
 const express = require('express');
-const { check, body } = require('express-validator');
+const { body } = require('express-validator');
 
 // Import the auth controller
 const authController = require('../controllers/auth');
@@ -16,7 +16,7 @@ router.post(
     '/login',
     [
         body('username').not().isEmpty().trim(),
-        body('password').isLength({ min: 5 }).trim()
+        body('password').isLength({ min: 8 }).trim()
     ],
     authController.postLogin
 );

@@ -3,7 +3,9 @@
 {% block content %}
     <section>
         <h2>Login</h2>
-        <p>{{ errorMessage }}</p>
+        {% if errorMessage != "" %}
+        <p class="error-message">{{ errorMessage }}</p>
+        {% endif %}
         <form action="/login" method="POST">
             <div>
                 <label for="username">Username: </label>

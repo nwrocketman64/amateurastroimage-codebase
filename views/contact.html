@@ -16,7 +16,7 @@
     </section>
     <section>
         {% if errorMessage is defined %}
-        <p>{{ errorMessage }}</p>
+        <p class="error-message">{{ errorMessage }}</p>
         {% endif %}
         <div class="container">
             <form action="/contact" method="POST">
@@ -39,9 +39,6 @@
                 <div><button type="submit">Send Form</button></div>
                 <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             </form>
-            <p>
-                I will try out best to get back to as soon as I can.
-            </p>
         </div>
     </section>
 {% endblock %}

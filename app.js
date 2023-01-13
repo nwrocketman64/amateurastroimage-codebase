@@ -19,7 +19,7 @@ const siteRoutes = require('./routes/site');
 
 // Create the web app.
 const app = express();
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 // Create the session store.
 const sessionStore = new MySQLStore({

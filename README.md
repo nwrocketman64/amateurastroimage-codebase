@@ -8,3 +8,13 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `data` mediumtext COLLATE utf8mb4_bin,
   PRIMARY KEY (`session_id`)
 )
+
+Request Table
+CREATE TABLE astro_image.requests (
+  request_id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  comment TEXT NOT NULL,
+  PRIMARY KEY (request_id)
+);

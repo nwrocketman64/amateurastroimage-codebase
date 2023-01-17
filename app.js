@@ -10,6 +10,8 @@ const nunjucks = require('nunjucks');
 const nunjucksDate = require('nunjucks-date');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
+const csurf = require("tiny-csrf");
+const cookieParser = require('cookie-parser');
 
 // Import the error controller.
 const errorController = require('./controllers/error');
@@ -17,6 +19,7 @@ const errorController = require('./controllers/error');
 // Import the routes.
 const siteRoutes = require('./routes/site');
 const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
 
 // Create the web app.
 const app = express();
@@ -38,6 +41,7 @@ app.use(session({
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
+    maxAge: 604800000,        // Session should only remain for one full week.
 }));
 
 // Configure nunjucksDate.
@@ -55,11 +59,16 @@ nunjucksDate.install(nunjucksEnv);
 
 // Parse the incoming request bodies.
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.COOKIE_PARSER));
+
+// Setup the CSRF protection.
+app.use(csurf(process.env.CSURF));
 
 // Make the static file folder open.
 app.use(express.static(path.join(__dirname, 'public')));
 
 // The following routes for the website.
+app.use('/admin', adminRoutes);
 app.use(authRoutes);
 app.use(siteRoutes);
 

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section>
+        {% if image %}
+        <h2>Full List of Request</h2>
+        <ul>
+        {% for request in requests %}
+            <li>
+                {{ request.last_name }}, {{ request.first_name }} - <time datetime="{{ request.date | date('YYYY-MM-DDTHH:mm') }}">{{ request.date | date }}</time> | <a href="/admin/view-request/{{ request.request_id }}">View Request</a> | <a href="/admin/delete-request/{{ request.request_id }}">Delete Request</a>
+            </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <h2>There are no requests</h2>
+        {% endif %}
+    </section>
+    <section>
+        <h2>Other Links</h2>
+        <ul>
+            <li>
+                <a href="/admin/reset-password">Reset Password: </a>Click here
+                to reset the password.
+            </li>
+            <li>
+                <a href="/admin">Admin: </a> Click go back.
+            </li>
+        </ul>
+        <form action="/logout" method="POST">
+            <button>Logout</button>
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        </form>
+    </section>
+{% endblock %}

@@ -25,10 +25,14 @@ exports.getImages = (req, res, next) => {
 // GET /contact
 // The function delivers the contact form to the user.
 exports.getContact = (req, res, next) => {
+    // Get the csft token for the form.
+    const csrfToken = req.csrfToken();
+    
     // Render the contact view.
     return res.render('contact.html', {
         title: 'Contact Us',
         path: '/contact',
+        csrfToken: csrfToken,
     });
 };
 

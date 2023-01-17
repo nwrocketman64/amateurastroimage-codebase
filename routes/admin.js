@@ -1,6 +1,6 @@
 // Import the need libraries.
 const express = require('express');
-const { check, body } = require('express-validator');
+const { body } = require('express-validator');
 
 // Import the auth code middleware.
 const isAuth = require('../middleware/is-auth');
@@ -23,7 +23,7 @@ router.post(
         body('date').not().isEmpty().trim().escape(),
         body('location').not().isEmpty().trim().escape(),
         body('telescope').not().isEmpty().trim().escape(),
-        body('comments').not().isEmpty().trim(),
+        body('comments').not().isEmpty().trim().escape(),
     ],
     adminController.postAddImage
 );
@@ -40,7 +40,7 @@ router.post(
         body('date').not().isEmpty().trim().escape(),
         body('location').not().isEmpty().trim().escape(),
         body('telescope').not().isEmpty().trim().escape(),
-        body('comments').not().isEmpty().trim(),
+        body('comments').not().isEmpty().trim().escape(),
     ],
     adminController.postEditImage
 );
@@ -64,6 +64,12 @@ router.post(
     ],
     adminController.postResetPassword
 );
+
+// GET /admin/images
+router.get('/images', isAuth, adminController.getAdminImages);
+
+// GET /admin/requests
+router.get('/requests', isAuth, adminController.getAdminRequests);
 
 // GET /admin
 router.get('/', isAuth, adminController.getAdmin);

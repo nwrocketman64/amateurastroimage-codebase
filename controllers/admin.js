@@ -1,3 +1,6 @@
+// Import the NPM packages.
+const { validationResult } = require('express-validator');
+
 // Import the database connection.
 const db = require('../models/database');
 
@@ -76,13 +79,107 @@ exports.getAdminImages = (req, res, next) => {
     });
 };
 
+// GET /admin/view-request/:id
+// The function returns one request.
+exports.getViewRequest = (req, res, next) => {
+    // Get the request id from the URL.
+    const requestId = req.params.id;
+
+    // Build the query to get the single request.
+    const query = `
+        SELECT * FROM requests
+        WHERE request_id = ?
+    `;
+
+    // Run the query.
+    db.query(query, [requestId])
+        .then(([rows, fields]) => {
+            return res.render('admin-request-view.html', {
+                title: 'Request from ' + rows[0].first_name + ' ' + rows[0].last_name,
+                path: '/home',
+                request: rows[0],
+            });
+        })
+        .catch(err => {
+            // If there was an error, redirect to the 500 page.
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
+};
+
+// GET /admin/delete-request/:id
+// The function returns the delete request page.
+exports.getDeleteRequest = (req, res, next) => {
+    // Get the request id from the URL.
+    const requestId = req.params.id;
+
+    // Build the query to get the single request.
+    const query = `
+        SELECT * FROM requests
+        WHERE request_id = ?
+    `;
+
+    // Run the query.
+    db.query(query, [requestId])
+        .then(([rows, fields]) => {
+            // Get the csrt token for the form.
+            const csrfToken = req.csrfToken();
+
+            // Render the delete request page.
+            return res.render('delete-request.html', {
+                title: 'Delete Request from ' + rows[0].first_name + ' ' + rows[0].last_name,
+                path: '/home',
+                request: rows[0],
+                csrfToken: csrfToken,
+            });
+        })
+        .catch(err => {
+            // If there was an error, redirect to the 500 page.
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
+};
+
+// POST /admin/delete-request/
+// The function deletes the request from the database.
+exports.postDeleteRequest = (req, res, next) => {
+    // Pull the validation results.
+    const errors = validationResult(req);
+
+    // If there was an error in validation, redirect to admin.
+    if (!errors.isEmpty()) {
+        return res.redirect('/admin');
+    };
+
+    // Get the request id.
+    const requestId = req.body.id;
+
+    // Build the query.
+    const query = `
+        DELETE FROM requests
+        WHERE request_id = ?
+    `;
+
+    // Run the query to delete the request.
+    db.query(query, [requestId])
+        .then(([rows, fields]) => {
+            return res.redirect('/admin/requests');
+        })
+        .catch(err => {
+            // If there was an error, redirect to the 500 page.
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
+};
+
 // GET /admin/requests
 // The function returns the request section of admins.
 exports.getAdminRequests = (req, res, next) => {
     // Build the query to pull the requests.
-    const query = `
-        SELECT * FROM requests
-    `;
+    const query = `SELECT * FROM requests ORDER BY date`;
 
     // Run the query to pull the list of request.
     db.query(query)

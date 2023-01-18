@@ -68,6 +68,22 @@ router.post(
 // GET /admin/images
 router.get('/images', isAuth, adminController.getAdminImages);
 
+// GET /admin/view-request/:id
+router.get('/view-request/:id', isAuth, adminController.getViewRequest);
+
+// GET /admin/delete-request/:id
+router.get('/delete-request/:id', isAuth, adminController.getDeleteRequest);
+
+// POST /admin/delete-request/
+router.post(
+    '/delete-request',
+    isAuth,
+    [
+        body('id').not().isEmpty().trim().escape(),
+    ],
+    adminController.postDeleteRequest
+);
+
 // GET /admin/requests
 router.get('/requests', isAuth, adminController.getAdminRequests);
 

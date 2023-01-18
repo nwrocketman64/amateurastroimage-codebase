@@ -2,7 +2,7 @@
 
 {% block content %}
     <section>
-        {% if image %}
+        {% if requests|length %}
         <h2>Full List of Request</h2>
         <ul>
         {% for request in requests %}

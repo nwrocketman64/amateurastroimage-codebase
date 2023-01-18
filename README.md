@@ -27,3 +27,15 @@ CREATE TABLE astro_image.users (
   password VARCHAR(255) NOT NULL,
   PRIMARY KEY (user_id)
 );
+
+Images Table
+CREATE TABLE astro_image.images (
+  image_id INT NOT NULL AUTO_INCREMENT,
+  object VARCHAR(255) NOT NULL,
+  path VARCHAR(255) NOT NULL,
+  location VARCHAR(255) NOT NULL,
+  telescope VARCHAR(255) NOT NULL,
+  comments TEXT NOT NULL,
+  date DATETIME NOT NULL,
+  PRIMARY KEY (image_id)
+);

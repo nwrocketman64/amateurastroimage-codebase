@@ -3,7 +3,9 @@
 {% block content %}
     <section>
         <h2>Add an image</h2>
-        <p class="errMessage">{{ errorMessage }}</p>
+        {% if errorMessage %}
+        <p class="error-message">{{ errorMessage }}</p>
+        {% endif %}
         <form action="/admin/add-image" method="POST" enctype="multipart/form-data">
             <div>
                 <label for="image">Image: </label>

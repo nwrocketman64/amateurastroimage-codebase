@@ -39,3 +39,5 @@ CREATE TABLE astro_image.images (
   date DATETIME NOT NULL,
   PRIMARY KEY (image_id)
 );
+
+ALTER TABLE your_database_name.your_table CONVERT TO CHARACTER SET utf8;

@@ -3,7 +3,9 @@
 {% block content %}
     <section>
         <h2>Edit an image</h2>
-        <p class="errMessage">{{ errorMessage }}</p>
+        {% if errorMessage %}
+        <p class="error-message">{{ errorMessage }}</p>
+        {% endif %}
         <form action="/admin/edit-image" method="POST">
             <div>
                 <label for="object">Object: </label>
@@ -26,7 +28,7 @@
                 <textarea name="comments" id="comments" rows="10" required>{% if comments %}{{ comments }}{% endif %}</textarea>
             </div>
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
-            <input type="hidden" name="imageId" value="{{ id }}">
+            <input type="hidden" name="imageId" value="{{ image_id }}">
             <div>
                 <button>Edit Image</button>
             </div>

@@ -1,12 +1,27 @@
-// Import the need libraries.
+// Import the NPM libraries.
 const express = require('express');
 const { body } = require('express-validator');
+const multer = require('multer');
 
 // Import the auth code middleware.
 const isAuth = require('../middleware/is-auth');
 
 // Import the admin controller
 const adminController = require('../controllers/admin');
+
+// Configure Multer
+const storageConfig = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'bucket');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    },
+});
+
+const upload = multer({
+    storage: storageConfig,
+});
 
 // Setup the router.
 const router = express.Router();
@@ -18,8 +33,9 @@ router.get('/add-image', isAuth, adminController.getAddImage);
 router.post(
     '/add-image',
     isAuth,
+    upload.single('image'),
     [
-        body('object').not().isEmpty().trim(),
+        body('object').not().isEmpty().trim().escape(),
         body('date').not().isEmpty().trim().escape(),
         body('location').not().isEmpty().trim().escape(),
         body('telescope').not().isEmpty().trim().escape(),
@@ -36,7 +52,7 @@ router.post(
     '/edit-image',
     isAuth,
     [
-        body('object').not().isEmpty().trim(),
+        body('object').not().isEmpty().trim().escape(),
         body('date').not().isEmpty().trim().escape(),
         body('location').not().isEmpty().trim().escape(),
         body('telescope').not().isEmpty().trim().escape(),

@@ -64,21 +64,14 @@ router.post(
 // GET /admin/delete-image/:id
 router.get('/delete-image/:id', isAuth, adminController.getDeleteImage);
 
-// POST /admin/delete-image/:id
-router.post('/delete-image/:id', isAuth, adminController.postDeleteImage);
-
-// GET /admin/reset-password
-router.get('/reset-password', isAuth, adminController.getResetPassword);
-
-// POST /admin/reset-password
+// POST /admin/delete-image
 router.post(
-    '/reset-password',
+    '/delete-image',
     isAuth,
     [
-        body('password').isLength({ min: 5 }).trim(),
-        body('cpassword').isLength({ min: 5 }).trim(),
+        body('id').not().isEmpty().trim().escape(),
     ],
-    adminController.postResetPassword
+    adminController.postDeleteImage
 );
 
 // GET /admin/images
@@ -102,6 +95,20 @@ router.post(
 
 // GET /admin/requests
 router.get('/requests', isAuth, adminController.getAdminRequests);
+
+// GET /admin/reset-password
+router.get('/reset-password', isAuth, adminController.getResetPassword);
+
+// POST /admin/reset-password
+router.post(
+    '/reset-password',
+    isAuth,
+    [
+        body('password').isLength({ min: 5 }).trim(),
+        body('cpassword').isLength({ min: 5 }).trim(),
+    ],
+    adminController.postResetPassword
+);
 
 // GET /admin
 router.get('/', isAuth, adminController.getAdmin);

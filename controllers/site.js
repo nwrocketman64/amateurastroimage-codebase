@@ -1,8 +1,12 @@
 // Import the NPM packages.
 const { validationResult } = require('express-validator');
+const { csrfSync } = require('csrf-sync');
 
 // Import the database connection.
 const db = require('../models/database');
+
+// Get the generated csrf token function.
+const { generateToken } = csrfSync();
 
 // GET / aka the homepage.
 // The function renders the homepage.
@@ -25,8 +29,8 @@ exports.getImages = (req, res, next) => {
 // GET /contact
 // The function delivers the contact form to the user.
 exports.getContact = (req, res, next) => {
-    // Get the csft token for the form.
-    const csrfToken = req.csrfToken();
+    // Get the csrf token for the form.
+    const csrfToken = generateToken(req);
     
     // Render the contact view.
     return res.render('contact.html', {
@@ -44,6 +48,9 @@ exports.postContact = (req, res, next) => {
 
     // If there was an error in validation, reload the contact page.
     if (!errors.isEmpty()) {
+        // Get the csrf token for the form.
+        const csrfToken = generateToken(req);
+
         return res.render('contact.html', {
             title: 'Contact Us',
             path: '/contact',
@@ -52,6 +59,7 @@ exports.postContact = (req, res, next) => {
             lastName: req.body.lname,
             email: req.body.email,
             comment: req.body.comment,
+            csrfToken: csrfToken,
         });
     };
 

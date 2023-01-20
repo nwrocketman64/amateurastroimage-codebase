@@ -10,8 +10,7 @@ const nunjucks = require('nunjucks');
 const nunjucksDate = require('nunjucks-date');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const csurf = require("tiny-csrf");
-const cookieParser = require('cookie-parser');
+const { csrfSync } = require('csrf-sync');
 
 // Import the error controller.
 const errorController = require('./controllers/error');
@@ -59,16 +58,6 @@ nunjucksDate.install(nunjucksEnv);
 
 // Parse the incoming request bodies.
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser(process.env.COOKIE_PARSER));
-
-// Setup the CSRF protection.
-app.use(
-    csurf(
-        process.env.CSURF,
-        ['POST'],
-        ['/admin/add-image', '/admin/edit-image']
-    )
-);
 
 // Make the static file folder open.
 app.use(express.static(path.join(__dirname, 'public')));

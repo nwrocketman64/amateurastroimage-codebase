@@ -2,6 +2,7 @@
 
 {% block content %}
     <section>
+        {% if images|length %}
         <h2>List of Images</h2>
         <ul>
         {% for image in images %}
@@ -10,6 +11,9 @@
             </li>
         {% endfor %}
         </ul>
+        {% else %}
+        <h2>There are no images</h2>
+        {% endif %}
     </section>
     <section>
         <h2>Other Links</h2>

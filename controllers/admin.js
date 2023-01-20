@@ -4,6 +4,7 @@ const path = require('path');
 // Import the NPM packages.
 const { validationResult } = require('express-validator');
 const sharp = require('sharp');
+const bcrypt = require('bcryptjs');
 
 // Import the database connection.
 const db = require('../models/database');
@@ -206,23 +207,22 @@ exports.postEditImage = (req, res, next) => {
         location,
         telescope,
         comments,
-        imageId,
     ];
 
     // Build the query.
-    const query = `
+    const query1 = `
         UPDATE images
-        SET 
-            object = ?,
-            date = ?,
-            location = ?,
-            telescope = ?,
-            comments = ?
-        WHERE image_id = ?
+        SET
+            object = '${updatedImage[0]}',
+            date = '${updatedImage[1]}',
+            location = '${updatedImage[2]}',
+            telescope = '${updatedImage[3]}',
+            comments = '${updatedImage[4]}'
+        WHERE image_id = ${imageId}
     `;
 
     // Push the data into the database.
-    db.query(query, [updatedImage])
+    db.query(query1)
         .then(([rows, fields]) => {
             // Redirect to the admin image page.
             return res.redirect('/admin/images');
@@ -238,25 +238,69 @@ exports.postEditImage = (req, res, next) => {
 // GET /admin/delete-image/:id
 // The function return the delete image page.
 exports.getDeleteImage = (req, res, next) => {
-    return res.render('delete-image.html', {
-        title: 'Delete Image',
-        path: '/home',
-    });
+    // Get the request id from the URL.
+    const imageId = req.params.id;
+
+    // Build the query to get the single request.
+    const query = `
+        SELECT * FROM images
+        WHERE image_id = ?
+    `;
+
+    // Run the query.
+    db.query(query, [imageId])
+        .then(([rows, fields]) => {
+            // Get the csrt token for the form.
+            const csrfToken = req.csrfToken();
+
+            // Render the delete image page.
+            return res.render('delete-image.html', {
+                title: 'Delete Image',
+                path: '/home',
+                image: rows[0],
+                csrfToken: csrfToken,
+            });
+        })
+        .catch(err => {
+            // If there was an error, redirect to the 500 page.
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
 };
 
-// POST /admin/delete-image/:id
+// POST /admin/delete-image
 // The function delete the request image from the database.
 exports.postDeleteImage = (req, res, next) => {
-    return res.redirect('/admin');
-};
+    // Pull the validation results.
+    const errors = validationResult(req);
 
-// GET /admin/reset-password
-// The function returns the reset password page.
-exports.getResetPassword = (req, res, next) => {
-    return res.render('reset-password.html', {
-        title: 'Reset Password',
-        path: '/home',
-    });
+    // If there was an error in validation, redirect to admin.
+    if (!errors.isEmpty()) {
+        return res.redirect('/admin');
+    };
+
+    // Get the request id.
+    const imageId = req.body.id;
+
+    // Build the query.
+    const query = `
+        DELETE FROM images
+        WHERE image_id = ?
+    `;
+
+    // Run the query to delete the request.
+    db.query(query, [imageId])
+        .then(([rows, fields]) => {
+            // Redirect to admin images.
+            return res.redirect('/admin/images');
+        })
+        .catch(err => {
+            // If there was an error, redirect to the 500 page.
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
 };
 
 // GET /admin/images
@@ -392,7 +436,7 @@ exports.getAdminRequests = (req, res, next) => {
     // Run the query to pull the list of request.
     db.query(query)
         .then(([rows, fields]) => {
-            // Get the csft token for the form.
+            // Get the csrf token for the form.
             const csrfToken = req.csrfToken();
 
             // Render the admin page.
@@ -411,10 +455,82 @@ exports.getAdminRequests = (req, res, next) => {
         });
 };
 
+// GET /admin/reset-password
+// The function returns the reset password page.
+exports.getResetPassword = (req, res, next) => {
+    // Get the csrf token for the form.
+    const csrfToken = req.csrfToken();
+
+    // Render the Reset password page.
+    return res.render('reset-password.html', {
+        title: 'Reset Password',
+        path: '/home',
+        csrfToken: csrfToken,
+    });
+};
+
 // POST /admin/reset-password
 // The function resets the user's password.
-exports.postResetPassword = (req, res, next) => {
-    return res.redirect('/admin');
+exports.postResetPassword = async (req, res, next) => {
+    // Pull the data from the form.
+    const password = req.body.password;
+    const cpassword = req.body.cpassword;
+    const errors = validationResult(req);
+
+    // Validate the form.
+    if (!errors.isEmpty()) {
+        // Get the csrf token for the form.
+        const csrfToken = req.csrfToken();
+
+        // If the form is not validated, reload the page.
+        return res.status(422).render('reset-password.html', {
+            title: 'Reset Password',
+            path: '/home',
+            csrfToken: csrfToken,
+            errorMessage: 'Please fill out the form completely',
+        });
+    };
+
+    // Check to make sure the passwords match.
+    if (cpassword != password) {
+        // Get the csrf token for the form.
+        const csrfToken = req.csrfToken();
+
+        // If not, reload the page.
+        return res.status(422).render('reset-password.html', {
+            title: 'Reset Password',
+            path: '/home',
+            csrfToken: csrfToken,
+            errorMessage: 'Passwords do not match',
+        });
+    };
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Get the user id from the session.
+    const user_id = req.session.user.id;
+
+    // Build the query.
+    const query = `
+        UPDATE users
+        SET
+            password = ?
+        WHERE user_id = ?
+    `;
+
+    // Run the query.
+    db.query(query, [hashedPassword, user_id])
+        .then(([rows, fields]) => {
+            // Redirect to the admin page.
+            return res.redirect('/admin');
+        })
+        .catch(err => {
+            // If there was an error, redirect to the 500 page.
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
 };
 
 // GET /admin

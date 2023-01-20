@@ -8,7 +8,7 @@ const db = require('../models/database');
 // GET /login
 // The function delievers the login view.
 exports.getLogin = (req, res, next) => {
-    // Get the csft token for the form.
+    // Get the csrf token for the form.
     const csrfToken = req.csrfToken();
 
     // Render the login page
@@ -86,7 +86,7 @@ exports.postLogin = (req, res, next) => {
                                 res.redirect('/admin');
                             });
                         } else {
-                            // Get the csft token for the form.
+                            // Get the csrf token for the form.
                             const csrfToken = req.csrfToken();
                             
                             // If not, reload the login page.

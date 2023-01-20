@@ -1,6 +1,10 @@
 // Import the need libraries.
 const express = require('express');
 const { body } = require('express-validator');
+const { csrfSync } = require('csrf-sync');
+
+// Get the generated csrf token function.
+const { csrfSynchronisedProtection } = csrfSync();
 
 // Import the shop controller
 const siteController = require('../controllers/site');
@@ -24,6 +28,7 @@ router.get('/contact', siteController.getContact);
 // POST /contact
 router.post(
     '/contact',
+    csrfSynchronisedProtection,
     [
         body('fname').not().isEmpty().trim().escape().isLength({ max: 255 }),
         body('lname').not().isEmpty().trim().escape().isLength({ max: 255 }),

@@ -17,27 +17,37 @@
     {% if image %}
     <section>
         <h2>The Latest Image</h2>
-        <img src="/bucket/stand-{{ image.fullImg }}" alt="{{ image.object }} - {{ image.date | date }}">
+        <img src="/stand-{{ image.path }}" alt="{{ image.object }} - {{ image.date | date }}">
         <p class="title-text">
             {{ image.object }} - taken on <time datetime="{{ image.date | date('YYYY-MM-DDTHH:mm') }}">{{ image.date | date }}</time>
         </p>
-        <p class="btn"><a href="/image-view/{{ image._id }}">Details</a></p>
+        <p class="btn"><a href="/image-view/{{ image.image_id }}">Details</a></p>
     </section>
     {% endif %}
     <section>
-        <h2>Site Navigation</h2>
-        <ul>
-            <li>
-                <a href="/images">Images:</a> See all the images taken through
-                my telescope and stored on the website.
-            </li>
-            <li>
-                <a href="/contact">Contact:</a> Go here to send me some
-                feedback for this website.
-            </li>
-            <li>
-                <a href="/about">About:</a> More information about the website.
-            </li>
-        </ul>
+        <h2>Images</h2>
+        <p>
+            This is the full list of images that I have taken
+            and store on this site. From here, you can view
+            the details of the images and even download the
+            original copy.
+        </p>
+        <p class="btn"><a href="/images">Full List of Images</a></p>
+    </section>
+    <section>
+        <h2>Contact</h2>
+        <p>
+            Click here to use the contact form if you have any
+            questions about the content on this website or any
+            feedback that you want to give.
+        </p>
+        <p class="btn"><a href="/contact">Contact Form</a></p>
+    </section>
+    <section>
+        <h2>About</h2>
+        <p style="text-align: center;">
+            This is the about page for the website.
+        </p>
+        <p class="btn"><a href="/about">About</a></p>
     </section>
 {% endblock %}

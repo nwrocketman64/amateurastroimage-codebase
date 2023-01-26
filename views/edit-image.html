@@ -27,7 +27,6 @@
                 <label for="comments">Comments: </label>
                 <textarea name="comments" id="comments" rows="10" required>{% if comments %}{{ comments }}{% endif %}</textarea>
             </div>
-            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="imageId" value="{{ image_id }}">
             <div>
                 <button>Edit Image</button>

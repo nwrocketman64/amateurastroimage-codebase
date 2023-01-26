@@ -10,7 +10,6 @@ const nunjucks = require('nunjucks');
 const nunjucksDate = require('nunjucks-date');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const { csrfSync } = require('csrf-sync');
 
 // Import the error controller.
 const errorController = require('./controllers/error');
@@ -61,6 +60,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Make the static file folder open.
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'bucket')));
 
 // The following routes for the website.
 app.use('/admin', adminRoutes);

@@ -37,7 +37,6 @@
                     <textarea id="comment" name="comment" placeholder="Text goes here" style="height:200px" required>{% if comment is defined %}{{ comment }}{% endif %}</textarea>
                 </div>
                 <div><button type="submit">Send Form</button></div>
-                <input type="hidden" name="CSRFToken" value="{{ csrfToken }}">
             </form>
         </div>
     </section>

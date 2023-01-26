@@ -12,14 +12,10 @@ const db = require('../models/database');
 // GET /admin/add-image
 // The function renders the add image page.
 exports.getAddImage = (req, res, next) => {
-    // Get the csrt token for the form.
-    const csrfToken = req.csrfToken();
-
     // Render the add image view.
     return res.render('add-image.html', {
         title: 'Add Image',
         path: '/home',
-        csrfToken: csrfToken,
     });
 };
 
@@ -37,8 +33,6 @@ exports.postAddImage = async (req, res, next) => {
 
     // Validate the form data.
     if (!image || !errors.isEmpty()) {
-        // Get the csrf token for the form.
-        const csrfToken = req.csrfToken();
 
         // Return to the add image page.
         return res.status(422).render('add-image.html', {
@@ -49,7 +43,6 @@ exports.postAddImage = async (req, res, next) => {
             location: location,
             telescope: telescope,
             comments: comments,
-            csrfToken: csrfToken,
             errorMessage: 'Please fill out all the form elements',
         });
     };
@@ -149,15 +142,11 @@ exports.getEditImage = (req, res, next) => {
     // Run the query.
     db.query(query, [requestId])
         .then(([rows, fields]) => {
-            // Get the csrf token for the form.
-            const csrfToken = req.csrfToken();
-
             // Render the edit image page.
             return res.render('edit-image.html', {
                 title: 'Edit Image',
                 path: '/home',
                 ...rows[0],
-                csrfToken: csrfToken,
             });
         })
         .catch(err => {
@@ -182,8 +171,6 @@ exports.postEditImage = (req, res, next) => {
 
     // Validate the form data.
     if (!errors.isEmpty()) {
-        // Get the csrf token for the form.
-        const csrfToken = req.csrfToken();
 
         // Return to the add image page.
         return res.status(422).render('add-image.html', {
@@ -195,7 +182,6 @@ exports.postEditImage = (req, res, next) => {
             telescope: telescope,
             comments: comments,
             image_id: imageId,
-            csrfToken: csrfToken,
             errorMessage: 'Please fill out all the form elements',
         });
     };
@@ -250,15 +236,11 @@ exports.getDeleteImage = (req, res, next) => {
     // Run the query.
     db.query(query, [imageId])
         .then(([rows, fields]) => {
-            // Get the csrt token for the form.
-            const csrfToken = req.csrfToken();
-
             // Render the delete image page.
             return res.render('delete-image.html', {
                 title: 'Delete Image',
                 path: '/home',
                 image: rows[0],
-                csrfToken: csrfToken,
             });
         })
         .catch(err => {
@@ -306,9 +288,6 @@ exports.postDeleteImage = (req, res, next) => {
 // GET /admin/images
 // The function returns the image section of admins.
 exports.getAdminImages = (req, res, next) => {
-    // Get the csrt token for the form.
-    const csrfToken = req.csrfToken();
-
     // Build the query.
     const query = `SELECT * FROM images`;
 
@@ -319,7 +298,6 @@ exports.getAdminImages = (req, res, next) => {
             return res.render('admin-images.html', {
                 title: 'Admin - Full List of Images',
                 path: '/home',
-                csrfToken: csrfToken,
                 images: rows,
             });
         })
@@ -375,15 +353,11 @@ exports.getDeleteRequest = (req, res, next) => {
     // Run the query.
     db.query(query, [requestId])
         .then(([rows, fields]) => {
-            // Get the csrt token for the form.
-            const csrfToken = req.csrfToken();
-
             // Render the delete request page.
             return res.render('delete-request.html', {
                 title: 'Delete Request from ' + rows[0].first_name + ' ' + rows[0].last_name,
                 path: '/home',
                 request: rows[0],
-                csrfToken: csrfToken,
             });
         })
         .catch(err => {
@@ -436,14 +410,10 @@ exports.getAdminRequests = (req, res, next) => {
     // Run the query to pull the list of request.
     db.query(query)
         .then(([rows, fields]) => {
-            // Get the csrf token for the form.
-            const csrfToken = req.csrfToken();
-
             // Render the admin page.
             return res.render('admin-requests.html', {
                 title: 'Admin - Full List of Request',
                 path: '/home',
-                csrfToken: csrfToken,
                 requests: rows,
             });
         })
@@ -458,14 +428,10 @@ exports.getAdminRequests = (req, res, next) => {
 // GET /admin/reset-password
 // The function returns the reset password page.
 exports.getResetPassword = (req, res, next) => {
-    // Get the csrf token for the form.
-    const csrfToken = req.csrfToken();
-
     // Render the Reset password page.
     return res.render('reset-password.html', {
         title: 'Reset Password',
         path: '/home',
-        csrfToken: csrfToken,
     });
 };
 
@@ -479,28 +445,20 @@ exports.postResetPassword = async (req, res, next) => {
 
     // Validate the form.
     if (!errors.isEmpty()) {
-        // Get the csrf token for the form.
-        const csrfToken = req.csrfToken();
-
         // If the form is not validated, reload the page.
         return res.status(422).render('reset-password.html', {
             title: 'Reset Password',
             path: '/home',
-            csrfToken: csrfToken,
             errorMessage: 'Please fill out the form completely',
         });
     };
 
     // Check to make sure the passwords match.
     if (cpassword != password) {
-        // Get the csrf token for the form.
-        const csrfToken = req.csrfToken();
-
         // If not, reload the page.
         return res.status(422).render('reset-password.html', {
             title: 'Reset Password',
             path: '/home',
-            csrfToken: csrfToken,
             errorMessage: 'Passwords do not match',
         });
     };
@@ -536,13 +494,9 @@ exports.postResetPassword = async (req, res, next) => {
 // GET /admin
 // The function returns the admin page.
 exports.getAdmin = (req, res, next) => {
-    // Get the csft token for the form.
-    const csrfToken = req.csrfToken();
-
     // Render the admin page.
     return res.render('admin.html', {
         title: 'Admins',
         path: '/home',
-        csrfToken: csrfToken,
     });
 };

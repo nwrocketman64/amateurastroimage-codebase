@@ -8,16 +8,12 @@ const db = require('../models/database');
 // GET /login
 // The function delievers the login view.
 exports.getLogin = (req, res, next) => {
-    // Get the csrf token for the form.
-    const csrfToken = req.csrfToken();
-
     // Render the login page
     return res.render('login.html', {
         title: 'Login',
         path: '/home',
         errorMessage: '',
         email: '',
-        csrfToken: csrfToken,
     });
 };
 
@@ -31,16 +27,12 @@ exports.postLogin = (req, res, next) => {
 
     // Validate the inputs.
     if (!errors.isEmpty()) {
-        // Get the csft token for the form.
-        const csrfToken = req.csrfToken();
-
         // If it does not validate, return the login page.
         return res.status(422).render('login.html', {
             title: 'Login',
             path: '/home',
             errorMessage: 'Please fill out all the forms',
             email: email,
-            csrfToken: csrfToken,
         });
     }
 
@@ -55,16 +47,12 @@ exports.postLogin = (req, res, next) => {
         .then(([rows, fields]) => {
             // If the query comes up empty, reload the login page.
             if (rows.length === 0) {
-                // Get the csft token for the form.
-                const csrfToken = req.csrfToken();
-
                 // Render the login page.
                 return res.status(422).render('login.html', {
                     title: 'Login',
                     path: '/home',
                     errorMessage: 'Username Not Found',
                     email: email,
-                    csrfToken: csrfToken,
                 });
             } else {
                 // If the username was found, compare the password with the hashed password.
@@ -86,16 +74,12 @@ exports.postLogin = (req, res, next) => {
                                 res.redirect('/admin');
                             });
                         } else {
-                            // Get the csrf token for the form.
-                            const csrfToken = req.csrfToken();
-                            
                             // If not, reload the login page.
                             return res.status(422).render('login.html', {
                                 title: 'Login',
                                 path: '/home',
                                 errorMessage: 'Password is Incorrect',
                                 email: email,
-                                csrfToken: csrfToken,
                             });
                         };
                     });

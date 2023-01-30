@@ -1,6 +1,7 @@
 // Import the NPM packages.
 const { validationResult } = require('express-validator');
 const Recaptcha = require('express-recaptcha').RecaptchaV2;
+const nodemailer = require('nodemailer');
 
 // Import the database connection.
 const db = require('../models/database');
@@ -176,8 +177,29 @@ exports.postContact = (req, res, next) => {
             // Push the data into the database.
             db.query(query, [formData])
                 .then(([rows, fields]) => {
-                    // Redirect to the success page.
-                    return res.redirect('/form-sent')
+                    // Setup the transporter for the nodemailer.
+                    const transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: process.env.GMAIL_USER,
+                            pass: process.env.GMAIL_PASS,
+                        }
+                    });
+
+                    // Setup the email.
+                    const mailOptions = {
+                        from: process.env.GMAIL_USER,
+                        to: req.body.email,
+                        subject: 'Comments Has Been Receive - Amateur Astro Image',
+                        text: `Hello ${req.body.fname} ${req.body.lname},\nWe have received your comment and we thank you for your feedback. We will get back to you as soon as we can if needed.\n-Amateur Astro Image Team`
+                    };
+
+                    // Send the response email.
+                    transporter.sendMail(mailOptions)
+                        .then((info) => {
+                            // Redirect to the success page.
+                            return res.redirect('/form-sent')
+                        });
                 })
                 .catch(err => {
                     // If there was an error, redirect to the 500 page.

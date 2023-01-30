@@ -2,14 +2,12 @@
 This is the main codebase for the my Astrophotography website. The code here is made open-source under Apache License 2.0 and you are free to look at the code to either add any suggestments to improve the code or to copy it and use it as the base template for your website. This website includes features such as session and image uploads. The website is designed to run on any Linux server or Windows server. This website is designed to run on Nodejs version 19 or higher.
 
 # Installing
-To install the website for running on your computer, you can clone the codebase either by using the GitHub website or through git. Once it is on your computer, to get the website running you must create an .env.process which contains the enviroment variable for DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PASS, DATABASE, SESSION_SECRET, SECRET_KEY, GMAIL_USER, GMAIL_PASS, and PORT. Once that file is created, you can install all the needed libraries using the npm package manager.
+To install the website for running on your computer, you can clone the codebase either by using the GitHub website or through git. Once it is on your computer, to get the website running you must create an .env.process which contains the enviroment variable for DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PASS, and DATABASE for database configuration. SESSION_SECRET and SECRET_KEY for configuring the session for the website. GMAIL_USER and GMAIL_PASS for nodemailer in the contact form. RECAPTCHA_SITE and RECAPTCHA_SECRET for Google ReCaptcha. PORT for which port the website will use on the server. Once that file is created, you can install all the needed libraries using the npm package manager.
 ```
 npm install
 ```
-Once it is done installing, you can startup the website on your machine using this command.
-```
-npm start
-```
+Once it is done installing, there are a still a few things that need to be configured before the website can be run and be fully operational. To start, you get a Google ReCaptcha Site Key and Secret Key for the contact form. Then, you need to make a Gmail account a provide a username and password for the nodemailer. Once that is done, you will then need to configure the database and the database configuration can be found below.
+
 
 # Configure Database
 You can use these table templates to create the tables for an SQL-based database.
@@ -63,23 +61,30 @@ CREATE TABLE astro_image.images (
 
 If you have any problems with the tables, you might need to convert the tables to UTF-8 characterset.
 ```
-ALTER TABLE your_database_name.your_table CONVERT TO CHARACTER SET utf8;
+ALTER TABLE the_table CONVERT TO CHARACTER SET utf8;
+```
+
+# Starting the Website
+Once that is all done, you can start the website using this command below with nodemon.
+```
+npm start
 ```
 
 # Development Environment
-I used [VS code](https://code.visualstudio.com/) as the main IDE for creating the source code.
+I used [VS code](https://code.visualstudio.com/) as the main IDE for creating the source code. I used [MariaDB](https://mariadb.org/) in both the development and production. Microsoft Edge and Mozilla FireFox where the main web browser that I tested this website on.
 
 # Libraries Used
 Some of the key libraries that I used for this website include
 
-* [Express](https://expressjs.com/) - The main web framework.
-* [Express Session](http://expressjs.com/en/resources/middleware/session.html) - Used to make logging in possible.
-* [Express Validator](https://express-validator.github.io/docs/) - Used to validate and sanitize user inputs.
-* [Csurf](http://expressjs.com/en/resources/middleware/csurf.html) - Provide CSRF protection to the website.
 * [Bcypt](https://www.npmjs.com/package/bcrypt) - Used to encrypt passwords and compare hashes.
-* [Mongoose](https://mongoosejs.com/) - The library used to control the MongoDB.
+* [Custom-env](https://github.com/erisanolasheni/custom-env) - A tool used to load the enviroment variables.
+* [Express](https://expressjs.com/) - The main web framework.
+* [Express ReCaptcha](https://github.com/pdupavillon/express-recaptcha) - A tool to use to load Google's ReCaptcha on the page.
+* [Express Validator](https://express-validator.github.io/docs/) - Used to validate and sanitize user inputs.
+* [Express Session](http://expressjs.com/en/resources/middleware/session.html) - Used to make logging in possible.
 * [Multer](https://www.npmjs.com/package/multer) - Used to process images submitted to the webite.
-* [Nodemailer](https://nodemailer.com/about/) - Used in the contact form to send an email to myself.
+* [MySql2](http://sidorares.github.io/node-mysql2/) - A library used to manage the connection to the MariaDB database.
+* [Nodemailer](https://nodemailer.com/about/) - Used in the contact form to send an email.
 * [Nunjucks](https://mozilla.github.io/nunjucks/) - The main templating engine used in the project.
 * [Nunjucks Date](https://www.npmjs.com/package/nunjucks-date) - Provides a date filter for the templating engine.
 * [Sharp](https://sharp.pixelplumbing.com/) - The library used to process the images when received.
@@ -90,9 +95,6 @@ Some of the key libraries that I used for this website include
 These were a few website that I found to be very helpful in building this website
 
 * [NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)](https://www.udemy.com/course/nodejs-the-complete-guide/)
-* [Upload and Retrieve Image on MongoDB using Mongoose](https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/)
-* [Create Pagination with Node.js, MongoDB, Express and EJS Step by Step from Scratch](https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html)
-* [Mongoose Count](https://kb.objectrocket.com/mongo-db/mongoose-count-726)
 * [How To Process Images in Node.js With Sharp](https://www.digitalocean.com/community/tutorials/how-to-process-images-in-node-js-with-sharp)
 * [Templating](https://mozilla.github.io/nunjucks/templating.html)
 * [Node.js Send an Email](https://www.w3schools.com/nodejs/nodejs_email.asp)
@@ -102,6 +104,3 @@ These were a few website that I found to be very helpful in building this websit
 This is the link to active website deployed.
 
 [Amateur Astro Image](https://www.amateurastroimage.com/)
-
-# amateurastroimage-codebase
-This is the new codebase for Amateur Astro Image website.

@@ -7,6 +7,16 @@
 
 {% block content %}
     <section>
+        <h2>Version 2.0.0 - 1/30/2023</h2>
+        <ul>
+            <li>Migrated from MongoDB to MariaDB</li>
+            <li>Updated the Admin Section to handle request</li>
+            <li>Added Google ReCaptcha to the Contact Form</li>
+            <li>Removed the deprecated csurf package. Will add a new CSRF protection package later.</li>
+            <li>Updated all NPM packages</li>
+        </ul>
+    </section>
+    <section>
         <h2>Version 1.1.4</h2>
         <ul>
             <li>Added SEO optimization.</li>
@@ -43,13 +53,26 @@
         <p>
             The source code for this website is free to use and is
             open-source under the Apache 2.0 License. The link to the
-            <a href="https://github.com/nwrocketman64/astrophotography-website">GitHub repo</a>.
+            <a href="https://github.com/nwrocketman64/amateurastroimage-codebase">GitHub repo</a>.
             The link is also in the footer of the website.
+        </p>
+        <p>
+            The legacy codebase for this website can be found that this
+            <a href="https://github.com/nwrocketman64/astrophotography-website">GitHub repo</a>.
         </p>
         <h3>Libraries Used in this Websites</h3>
         <ul>
             <li>
+                <a href="https://www.npmjs.com/package/bcrypt">Bcypt</a> - Used to encrypt passwords and compare hashes.
+            </li>
+            <li>
+                <a href="https://github.com/erisanolasheni/custom-env">Custom-env</a> - A tool used to load the enviroment variables.
+            </li>
+            <li>
                 <a href="https://expressjs.com/">Express</a> - The main web framework.
+            </li>
+            <li>
+                <a href="https://github.com/pdupavillon/express-recaptcha">Express ReCaptcha</a> - A tool to use to load Google's ReCaptcha on the page.
             </li>
             <li>
                 <a href="http://expressjs.com/en/resources/middleware/session.html">Express Session</a> - Used to make logging in possible.
@@ -58,19 +81,13 @@
                 <a href="https://express-validator.github.io/docs/">Express Validator</a> - Used to validate and sanitize user inputs.
             </li>
             <li>
-                <a href="http://expressjs.com/en/resources/middleware/csurf.html">Csurf</a> - Provide CSRF protection to the website.
-            </li>
-            <li>
-                <a href="https://www.npmjs.com/package/bcrypt">Bcypt</a> - Used to encrypt passwords and compare hashes.
-            </li>
-            <li>
-                <a href="https://mongoosejs.com/">Mongoose</a> - The library used to control the MongoDB.
-            </li>
-            <li>
                 <a href="https://www.npmjs.com/package/multer">Multer</a> - Used to process images submitted to the webite
             </li>
             <li>
-                <a href="https://nodemailer.com/about/">Nodemailer</a> - Used in the contact form to send an email to myself.
+                <a href="http://sidorares.github.io/node-mysql2/">MySql2</a> - A library used to manage the connection to the MariaDB database.
+            </li>
+            <li>
+                <a href="https://nodemailer.com/about/">Nodemailer</a> - Used in the contact form to send an email.
             </li>
             <li>
                 <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> - The main templating engine used in the project.
@@ -92,15 +109,6 @@
         <ul>
             <li>
                 <a href="https://www.udemy.com/course/nodejs-the-complete-guide/">NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)</a>
-            </li>
-            <li>
-                <a href="https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/">Upload and Retrieve Image on MongoDB using Mongoose</a>
-            </li>
-            <li>
-                <a href="https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html">Create Pagination with Node.js, MongoDB, Express and EJS Step by Step from Scratch</a>
-            </li>
-            <li>
-                <a href="https://kb.objectrocket.com/mongo-db/mongoose-count-726">Mongoose Count</a>
             </li>
             <li>
                 <a href="https://www.digitalocean.com/community/tutorials/how-to-process-images-in-node-js-with-sharp">How To Process Images in Node.js With Sharp</a>

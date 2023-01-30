@@ -83,6 +83,12 @@ exports.getImages = (req, res, next) => {
                         pageNumber: currentPage,
                         totalPages: totalPages
                     });
+                })
+                .catch(err => {
+                    // If there was an error, redirect to the 500 page.
+                    const error = new Error(err);
+                    error.httpStatusCode = 500;
+                    return next(error);
                 });
         })
         .catch(err => {
@@ -199,6 +205,12 @@ exports.postContact = (req, res, next) => {
                         .then((info) => {
                             // Redirect to the success page.
                             return res.redirect('/form-sent')
+                        })
+                        .catch(err => {
+                            // If there was an error, redirect to the 500 page.
+                            const error = new Error(err);
+                            error.httpStatusCode = 500;
+                            return next(error);
                         });
                 })
                 .catch(err => {

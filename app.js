@@ -59,7 +59,7 @@ nunjucksDate.install(nunjucksEnv);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Make the static file folder open.
+// Make the static file and image bucket folders open.
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bucket')));
 

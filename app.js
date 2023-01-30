@@ -56,6 +56,7 @@ app.set('view engine', 'html');
 nunjucksDate.install(nunjucksEnv);
 
 // Parse the incoming request bodies.
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Make the static file folder open.

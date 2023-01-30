@@ -124,6 +124,7 @@ main img {
 
 .container textarea {
     resize: none;
+    margin-bottom: 15px;
 }
 
 .error-message {

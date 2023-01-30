@@ -36,6 +36,7 @@
                     <label for="comment">Comment</label>
                     <textarea id="comment" name="comment" placeholder="Text goes here" style="height:200px" required>{% if comment is defined %}{{ comment }}{% endif %}</textarea>
                 </div>
+                {{ captcha | safe }}
                 <div><button type="submit">Send Form</button></div>
             </form>
         </div>

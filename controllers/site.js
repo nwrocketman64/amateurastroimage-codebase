@@ -1,8 +1,12 @@
 // Import the NPM packages.
 const { validationResult } = require('express-validator');
+const Recaptcha = require('express-recaptcha').RecaptchaV2;
 
 // Import the database connection.
 const db = require('../models/database');
+
+// Configure recaptcha for the contact form page.
+const recaptcha = new Recaptcha(process.env.RECAPTCHA_SITE, process.env.RECAPTCHA_SECRET, { callback: 'cb' });
 
 // GET / aka the homepage.
 // The function renders the homepage.
@@ -126,6 +130,7 @@ exports.getContact = (req, res, next) => {
     return res.render('contact.html', {
         title: 'Contact Us',
         path: '/contact',
+        captcha: recaptcha.render(),
     });
 };
 
@@ -145,36 +150,55 @@ exports.postContact = (req, res, next) => {
             lastName: req.body.lname,
             email: req.body.email,
             comment: req.body.comment,
+            captcha: recaptcha.render(),
         });
     };
 
-    // Pull the form data.
-    const formData = [
-        req.body.fname,
-        req.body.lname,
-        req.body.email,
-        req.body.comment,
-    ];
+    // Verify the recaptcha score.
+    recaptcha.verify(req, (error, data) => {
+        // If recaptcha passed, continue processing the form.
+        if (!error){
+            // Pull the form data.
+            const formData = [
+                req.body.fname,
+                req.body.lname,
+                req.body.email,
+                req.body.comment,
+            ];
 
-    // Build the query to insert the request.
-    const query = `
-        INSERT INTO requests
-        (first_name, last_name, email, comment)
-        VALUE (?)
-    `;
+            // Build the query to insert the request.
+            const query = `
+                INSERT INTO requests
+                (first_name, last_name, email, comment)
+                VALUE (?)
+            `;
 
-    // Push the data into the database.
-    db.query(query, [formData])
-        .then(([rows, fields]) => {
-            // Redirect to the success page.
-            return res.redirect('/form-sent')
-        })
-        .catch(err => {
-            // If there was an error, redirect to the 500 page.
-            const error = new Error(err);
-            error.httpStatusCode = 500;
-            return next(error);
-        });
+            // Push the data into the database.
+            db.query(query, [formData])
+                .then(([rows, fields]) => {
+                    // Redirect to the success page.
+                    return res.redirect('/form-sent')
+                })
+                .catch(err => {
+                    // If there was an error, redirect to the 500 page.
+                    const error = new Error(err);
+                    error.httpStatusCode = 500;
+                    return next(error);
+                });
+        } else {
+            // If recaptcha failed, re-render the contact form page.
+            return res.render('contact.html', {
+                title: 'Contact Us',
+                path: '/contact',
+                errorMessage: 'There was failure with ReCaptcha',
+                firstName: req.body.fname,
+                lastName: req.body.lname,
+                email: req.body.email,
+                comment: req.body.comment,
+                captcha: recaptcha.render(),
+            });
+        }
+    });    
 };
 
 // GET /form-sent

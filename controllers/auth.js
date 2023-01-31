@@ -82,15 +82,21 @@ exports.postLogin = (req, res, next) => {
                                 email: email,
                             });
                         };
+                    })
+                    .catch(err => {
+                        // If there was an error, redirect to the 500 page.
+                        const error = new Error(err);
+                        error.httpStatusCode = 500;
+                        return next(error);
                     });
             };
         })
-     .catch(err => {
-        // If there was an error, redirect to the 500 page.
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-    });
+        .catch(err => {
+            // If there was an error, redirect to the 500 page.
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
 };
 
 // POST /logout

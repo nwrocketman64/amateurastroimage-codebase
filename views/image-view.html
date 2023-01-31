@@ -15,7 +15,7 @@
                 <td>{{ image.object }}</td>
             </tr>
             <tr>
-                <td>Date and Time Taken</td>
+                <td>Date and Time</td>
                 <td><time datetime="{{ image.date | date('YYYY-MM-DDTHH:mm') }}">{{ image.date | date }}</time></td>
             </tr>
             <tr>
@@ -31,9 +31,6 @@
                 <td>{{ image.comments }}</td>
             </tr>
         </table>
-        <p class="btn"><a href="/{{ image.path }}" download>Full Download</a></p>
-        <p style="text-align: center;">
-            Click on the button to download the full size image.
-        </p>
+        <p class="btn"><a href="/{{ image.path }}" download>Full Size Download</a></p>
     </section>
 {% endblock %}

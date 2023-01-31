@@ -96,10 +96,14 @@ exports.postAddImage = async (req, res, next) => {
             return next(error);
         });
 
+    // Create the date object and adjust for the current timezone.
+    let inputDate = new Date(date);
+    inputDate.setHours(inputDate.getHours() - 7);
+
     // Collect the form data into an array.
     const newImage = [
         object,
-        new Date(date).toISOString().slice(0, 19).replace('T', ' '),
+        inputDate.toISOString().slice(0, 19).replace('T', ' '),
         location,
         telescope,
         comments,
@@ -186,10 +190,14 @@ exports.postEditImage = (req, res, next) => {
         });
     };
 
+    // Create the date object and adjust for the current timezone.
+    let inputDate = new Date(date);
+    inputDate.setHours(inputDate.getHours() - 7);
+
     // Collect the form data into an array.
     const updatedImage = [
         object,
-        new Date(date).toISOString().slice(0, 19).replace('T', ' '),
+        inputDate.toISOString().slice(0, 19).replace('T', ' '),
         location,
         telescope,
         comments,
@@ -289,7 +297,7 @@ exports.postDeleteImage = (req, res, next) => {
 // The function returns the image section of admins.
 exports.getAdminImages = (req, res, next) => {
     // Build the query.
-    const query = `SELECT * FROM images`;
+    const query = `SELECT * FROM images ORDER BY date DESC`;
 
     // Run the the query.
     db.query(query)

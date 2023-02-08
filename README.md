@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `expires` int(11) unsigned NOT NULL,
   `data` mediumtext COLLATE utf8mb4_bin,
   PRIMARY KEY (`session_id`)
-)
+);
 ```
 
 Request Table

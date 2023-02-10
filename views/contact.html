@@ -1,44 +1,42 @@
 {% extends 'base.html' %}
 
 {% block addons %}
-    <meta name="description" content="You can use this form to contact us if you have questions / comments. I will try out best to get back to as soon as I can.">
-    <meta name="author" content="Amateur Astro Image Team">
+<meta name="description" content="You can use this form to contact us if you have questions / comments. I will try out best to get back to as soon as I can.">
+<meta name="author" content="Amateur Astro Image Team">
 {% endblock %}
 
 {% block content %}
-    <section>
-        <h2>Contact Form</h2>
-        <p>
-            You can use this form to contact us if you have
-            questions / comments. Make sure you fill
-            every item in the form.
-        </p>
-    </section>
-    <section>
-        {% if errorMessage is defined %}
-        <p class="error-message">{{ errorMessage }}</p>
-        {% endif %}
-        <div class="container">
-            <form action="/contact" method="POST">
-                <div>
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="fname" value="{% if firstName is defined %}{{ firstName }}{% endif %}" required>
-                </div>
-                <div>
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" name="lname" value="{% if lastName is defined %}{{ lastName }}{% endif %}" required>
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email" value="{% if email is defined %}{{ email }}{% endif %}" required>
-                </div>
-                <div>
-                    <label for="comment">Comment</label>
-                    <textarea id="comment" name="comment" placeholder="Text goes here" style="height:200px" required>{% if comment is defined %}{{ comment }}{% endif %}</textarea>
-                </div>
-                {{ captcha | safe }}
-                <div><button type="submit">Send Form</button></div>
-            </form>
+<section>
+    <h1>Contact Form</h1>
+    <p>
+        You can use this form to contact us if you have
+        questions / comments. Make sure you fill
+        every item in the form.
+    </p>
+</section>
+<section>
+    {% if errorMessage is defined %}
+    <p class="error-message">{{ errorMessage }}</p>
+    {% endif %}
+    <form action="/contact" method="POST">
+        <div>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" value="{% if firstName is defined %}{{ firstName }}{% endif %}" required>
         </div>
-    </section>
+        <div>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" value="{% if lastName is defined %}{{ lastName }}{% endif %}" required>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" value="{% if email is defined %}{{ email }}{% endif %}" required>
+        </div>
+        <div>
+            <label for="comment">Comment</label>
+            <textarea id="comment" name="comment" placeholder="Text goes here" style="height:200px" required>{% if comment is defined %}{{ comment }}{% endif %}</textarea>
+        </div>
+        {{ captcha | safe }}
+        <div><button type="submit">Send Form</button></div>
+    </form>
+</section>
 {% endblock %}

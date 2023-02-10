@@ -1,0 +1,22 @@
+body {
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+}
+
+#thePage {
+    font-weight: lighter;
+    color: black;
+}
+
+textarea {
+    resize: none;
+}
+
+.error-message {
+    color: white;
+    background-color: #f44336;
+    border: 1px solid #f44336;
+    border-radius: 8px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

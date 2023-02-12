@@ -15,7 +15,7 @@
     <header>
         <nav>
             <ul>
-                <li>Amateur Astro Image</li>
+                <li><a href="/" style="color: black;">Amateur Astro Image</a></li>
             </ul>
             <ul>
                 <li><a {% if '/home' in path %} id="thePage" {% endif %} href="/">Home</a></li>
@@ -25,7 +25,7 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main class="container">
         {% block content %}
         {% endblock %}
     </main>

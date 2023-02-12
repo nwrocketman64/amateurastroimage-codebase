@@ -1,38 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
-        {% if images|length %}
-        <h2>List of Images</h2>
-        <ul>
-        {% for image in images %}
-            <li>
-                {{ image.object }}, <time datetime="{{ image.date | date('YYYY-MM-DDTHH:mm') }}">{{ image.date | date }}</time> | <a href="/admin/edit-image/{{ image.image_id }}">Edit Image</a> | <a href="/admin/delete-image/{{ image.image_id }}">Delete Image</a>
-            </li>
-        {% endfor %}
-        </ul>
-        {% else %}
-        <h2>There are no images</h2>
-        {% endif %}
-    </section>
-    <section>
-        <h2>Other Links</h2>
-        <ul>
-            <li>
-                <a href="/admin/add-image">Add an image:</a> Click
-                here to add an image.
-            </li>
-            <li>
-                <a href="/admin/reset-password">Reset Password:</a> Click here
-                to reset the password.
-            </li>
-            <li>
-                <a href="/admin">Admin:</a> Click go back.
-            </li>
-        </ul>
-        <form action="/logout" method="POST">
-            <button>Logout</button>
-            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
-        </form>
-    </section>
+<section>
+    {% if images|length %}
+    <h2>List of Images</h2>
+    <ul>
+    {% for image in images %}
+        <li>
+            {{ image.object }}, <time datetime="{{ image.date | date('YYYY-MM-DDTHH:mm') }}">{{ image.date | date }}</time> | <a href="/admin/edit-image/{{ image.image_id }}">Edit Image</a> | <a href="/admin/delete-image/{{ image.image_id }}">Delete Image</a>
+        </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <h2>There are no images</h2>
+    {% endif %}
+</section>
+<section>
+    <h2>Other Links</h2>
+    <ul>
+        <li>
+            <a href="/admin/add-image">Add an image:</a> Click
+            here to add an image.
+        </li>
+        <li>
+            <a href="/admin/reset-password">Reset Password:</a> Click here
+            to reset the password.
+        </li>
+        <li>
+            <a href="/admin">Admin:</a> Click go back.
+        </li>
+    </ul>
+    <form action="/logout" method="POST">
+        <button>Logout</button>
+    </form>
+</section>
 {% endblock %}

@@ -87,9 +87,10 @@ Some of the key libraries that I used for this website include
 * [Nodemailer](https://nodemailer.com/about/) - Used in the contact form to send an email.
 * [Nunjucks](https://mozilla.github.io/nunjucks/) - The main templating engine used in the project.
 * [Nunjucks Date](https://www.npmjs.com/package/nunjucks-date) - Provides a date filter for the templating engine.
-* [Sharp](https://sharp.pixelplumbing.com/) - The library used to process the images when received.
 * [Nodemon](https://nodemon.io/) - Used in developing the web app as it restarts the app every time you make a change.
-* [Normalize.css](https://necolas.github.io/normalize.css/) - The CSS normalizer that I chose to use for the webiste.
+* [Normalize.css](https://necolas.github.io/normalize.css/) - It is used in the Pico.css framework.
+* [Pico.css](https://picocss.com/) - The lightweight CSS framework that I used for the this website.
+* [Sharp](https://sharp.pixelplumbing.com/) - The library used to process the images when received.
 
 # Useful Websites
 These were a few website that I found to be very helpful in building this website

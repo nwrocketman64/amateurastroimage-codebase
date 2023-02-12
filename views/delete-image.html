@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
-        <h2>Confirm to Delete Image</h2>
-        <p>
-            Are you sure you want to delete the image, {{ image.object }} - {{ image.date | date }}?
-        </p>
-        <div class="selection">
-        <form action="/admin/delete-image/" method="POST">
-            <input type="hidden" name="id" value="{{ image.image_id }}">
-            <input type="submit" value="Yes">
-        </form>
-        <form action="/admin" method="GET">
-            <input type="submit" value="No">
-        </form>
-        <br>
-        </div>
-    </section>
+<section>
+    <h1>Confirm to Delete Image</h1>
+    <p>
+        Are you sure you want to delete the image, {{ image.object }} - {{ image.date | date }}?
+    </p>
+    <div class="selection">
+    <form action="/admin/delete-image/" method="POST">
+        <input type="hidden" name="id" value="{{ image.image_id }}">
+        <input type="submit" value="Yes">
+    </form>
+    <form action="/admin" method="GET">
+        <input type="submit" value="No">
+    </form>
+    <br>
+    </div>
+</section>
 {% endblock %}

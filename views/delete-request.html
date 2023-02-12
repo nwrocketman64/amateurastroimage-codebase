@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
-        <h2>Confirm to Delete Request</h2>
-        <p>
-            Are you sure you want to delete the request from {{ request.last_name }}, {{ request.first_name }} at {{ request.email }} - {{ date | date }}?
-        </p>
-        <div class="selection">
-        <form action="/admin/delete-request/" method="POST">
-            <input type="hidden" name="id" value="{{ request.request_id }}">
-            <input type="submit" value="Yes">
-        </form>
-        <form action="/admin" method="GET">
-            <input type="submit" value="No">
-        </form>
-        <br>
-        </div>
-    </section>
+<section>
+    <h1>Confirm to Delete Request</h1>
+    <p>
+        Are you sure you want to delete the request from {{ request.last_name }}, {{ request.first_name }} at {{ request.email }} - {{ date | date }}?
+    </p>
+    <div class="selection">
+    <form action="/admin/delete-request/" method="POST">
+        <input type="hidden" name="id" value="{{ request.request_id }}">
+        <input type="submit" value="Yes">
+    </form>
+    <form action="/admin" method="GET">
+        <input type="submit" value="No">
+    </form>
+    <br>
+    </div>
+</section>
 {% endblock %}

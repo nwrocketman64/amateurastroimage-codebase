@@ -1,29 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
-        <h2>Admin Menu</h2>
-        <ul>
-            <li>
-                <a href="/admin/images">List of Images:</a> Click
-                to see the list of images.
-            </li>
-            <li>
-                <a href="/admin/requests">List of Requests:</a> Click
-                to see the list of requests.
-            </li>
-            <li>
-                <a href="/admin/add-image">Add an image:</a> Click
-                here to add an image.
-            </li>
-            <li>
-                <a href="/admin/reset-password">Reset Password:</a> Click here
-                to reset the password.
-            </li>
-        </ul>
-        <form action="/logout" method="POST">
-            <button>Logout</button>
-            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
-        </form>
-    </section>
+<section>
+    <h1>Admin Menu</h1>
+    <ul>
+        <li>
+            <a href="/admin/images">List of Images:</a> Click
+            to see the list of images.
+        </li>
+        <li>
+            <a href="/admin/requests">List of Requests:</a> Click
+            to see the list of requests.
+        </li>
+        <li>
+            <a href="/admin/add-image">Add an image:</a> Click
+            here to add an image.
+        </li>
+        <li>
+            <a href="/admin/reset-password">Reset Password:</a> Click here
+            to reset the password.
+        </li>
+    </ul>
+    <form action="/logout" method="POST">
+        <button>Logout</button>
+    </form>
+</section>
 {% endblock %}

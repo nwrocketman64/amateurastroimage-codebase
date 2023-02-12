@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
-        <h2>Edit an image</h2>
-        {% if errorMessage %}
-        <p class="error-message">{{ errorMessage }}</p>
-        {% endif %}
-        <form action="/admin/edit-image" method="POST">
-            <div>
-                <label for="object">Object: </label>
-                <input type="text" name="object" id="object" {% if object %} value="{{ object }}" {% endif %} required>
-            </div>
-            <div>
-                <label for="date">Date and Time Taken: </label>
-                <input type="datetime-local" name="date" id="date" {% if date %} value="{{ date | date("YYYY-MM-DDThh:mm") }}" {% endif %} required>
-            </div>
-            <div>
-                <label for="location">Location: </label>
-                <input type="text" name="location" id="location" {% if location %} value="{{ location }}" {% endif %} required>
-            </div>
-            <div>
-                <label for="telescope">Telescope Used: </label>
-                <input type="text" name="telescope" id="telescope" {% if telescope %} value="{{ telescope }}" {% endif %} required>
-            </div>
-            <div>
-                <label for="comments">Comments: </label>
-                <textarea name="comments" id="comments" rows="10" required>{% if comments %}{{ comments }}{% endif %}</textarea>
-            </div>
-            <input type="hidden" name="imageId" value="{{ image_id }}">
-            <div>
-                <button>Edit Image</button>
-            </div>
-        </form>
-    </section>
+<section>
+    <h1>Edit an image</h1>
+    {% if errorMessage %}
+    <p class="error-message">{{ errorMessage }}</p>
+    {% endif %}
+    <form action="/admin/edit-image" method="POST">
+        <div>
+            <label for="object">Object: </label>
+            <input type="text" name="object" id="object" {% if object %} value="{{ object }}" {% endif %} required>
+        </div>
+        <div>
+            <label for="date">Date and Time Taken: </label>
+            <input type="datetime-local" name="date" id="date" {% if date %} value="{{ date | date("YYYY-MM-DDThh:mm") }}" {% endif %} required>
+        </div>
+        <div>
+            <label for="location">Location: </label>
+            <input type="text" name="location" id="location" {% if location %} value="{{ location }}" {% endif %} required>
+        </div>
+        <div>
+            <label for="telescope">Telescope Used: </label>
+            <input type="text" name="telescope" id="telescope" {% if telescope %} value="{{ telescope }}" {% endif %} required>
+        </div>
+        <div>
+            <label for="comments">Comments: </label>
+            <textarea name="comments" id="comments" rows="10" required>{% if comments %}{{ comments }}{% endif %}</textarea>
+        </div>
+        <input type="hidden" name="imageId" value="{{ image_id }}">
+        <div>
+            <button>Edit Image</button>
+        </div>
+    </form>
+</section>
 {% endblock %}

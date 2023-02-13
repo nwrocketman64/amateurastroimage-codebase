@@ -1,6 +1,6 @@
 {
   "name": "amateurastroimage-codebase",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "This is the codebase for the new version of the Amateur Astro Image website build using Express JS and now running off of an SQL based database.",
   "main": "app.js",
   "scripts": {

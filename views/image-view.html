@@ -7,8 +7,11 @@
 
 {% block content %}
 <section>
+    <article>
+    <h1>{{ title }}</h1>
     <img src="/stand-{{ image.path }}" alt="{{ image.object }} - {{ image.date | date }}">
-    <h1>Details for {{ image.object }}</h1>
+    </article>
+    <h2>Details for the Image</h2>
     <table>
         <tr>
             <td>Object in the Image</td>
@@ -31,6 +34,6 @@
             <td>{{ image.comments }}</td>
         </tr>
     </table>
-    <p class="btn"><a href="/{{ image.path }}" download>Full Size Download</a></p>
+    <p style="text-align: center;"><a role="button" href="/{{ image.path }}" download>Full Size Download</a></p>
 </section>
 {% endblock %}

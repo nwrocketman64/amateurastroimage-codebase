@@ -9,11 +9,11 @@
 <section>
     {% if images|length %}
     <h1>List of Images</h1>
-    <div class="grid">
+    <div id="image-list">
         {% for image in images %}
         <article>
             <img src="/thumb-{{ image.path }}" alt="{{ image.object }} - {{ image.date | date }}">
-            <p>{{ image.object }} | <time datetime="{{ image.date | date('YYYY-MM-DDTHH:mm') }}">{{ image.date | date('MM/DD/YYYY') }}</time></p>
+            <h6>{{ image.object }} | <time datetime="{{ image.date | date('YYYY-MM-DDTHH:mm') }}">{{ image.date | date('MM/DD/YYYY') }}</time></h6>
             <p><a role="button" href="/image-view/{{ image.image_id }}">Details</a></p>
         </article>
         {% endfor %}

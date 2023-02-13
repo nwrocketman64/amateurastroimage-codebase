@@ -20,3 +20,67 @@ textarea {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a, .current-page {
+    color: black;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.pagination a:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #464646;
+    border: 1px solid #464646;
+    transition: all 0.33s ease 0s;
+}
+
+.left-button {
+    border-radius: 15px 0px 0px 15px;
+}
+
+.right-button {
+    border-radius: 0px 15px 15px 0px;
+}
+
+article {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+}
+
+#image-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+/* Tablet Size Viewports */
+@media only screen and (min-width: 37em) {
+    /* Code for the image list page */
+    #image-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Large View for Desktop computers */
+@media only screen and (min-width: 64rem) {
+    /* Code for the image list page */
+    #image-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

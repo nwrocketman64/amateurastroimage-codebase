@@ -84,11 +84,11 @@ Some of the key libraries that I used for this website include
 * [Express Session](http://expressjs.com/en/resources/middleware/session.html) - Used to make logging in possible.
 * [Multer](https://www.npmjs.com/package/multer) - Used to process images submitted to the webite.
 * [MySql2](http://sidorares.github.io/node-mysql2/) - A library used to manage the connection to the MariaDB database.
+* [Normalize.css](https://necolas.github.io/normalize.css/) - It is used in the Pico.css framework.
 * [Nodemailer](https://nodemailer.com/about/) - Used in the contact form to send an email.
+* [Nodemon](https://nodemon.io/) - Used in developing the web app as it restarts the app every time you make a change.
 * [Nunjucks](https://mozilla.github.io/nunjucks/) - The main templating engine used in the project.
 * [Nunjucks Date](https://www.npmjs.com/package/nunjucks-date) - Provides a date filter for the templating engine.
-* [Nodemon](https://nodemon.io/) - Used in developing the web app as it restarts the app every time you make a change.
-* [Normalize.css](https://necolas.github.io/normalize.css/) - It is used in the Pico.css framework.
 * [Pico.css](https://picocss.com/) - The lightweight CSS framework that I used for the this website.
 * [Sharp](https://sharp.pixelplumbing.com/) - The library used to process the images when received.
 

@@ -1,6 +1,6 @@
 {
   "name": "amateurastroimage-codebase",
-  "version": "2.1.1",
+  "version": "2.1.3",
   "description": "This is the codebase for the new version of the Amateur Astro Image website build using Express JS and now running off of an SQL based database.",
   "main": "app.js",
   "scripts": {
@@ -18,14 +18,14 @@
   },
   "homepage": "https://github.com/nwrocketman64/amateurastroimage-codebase#readme",
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.22"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "custom-env": "^2.0.1",
     "express": "^4.18.2",
-    "express-mysql-session": "^2.1.8",
+    "express-mysql-session": "^3.0.0",
     "express-recaptcha": "^5.1.0",
     "express-session": "^1.17.3",
     "express-validator": "^6.15.0",
@@ -34,6 +34,6 @@
     "nodemailer": "^6.9.1",
     "nunjucks": "^3.2.3",
     "nunjucks-date": "^1.5.0",
-    "sharp": "^0.31.3"
+    "sharp": "^0.32.0"
   }
 }

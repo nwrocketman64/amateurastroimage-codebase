@@ -5,11 +5,13 @@
     <h1>View Request</h1>
     <p>Email: <a href="mailto:{{ request.email }}">{{ request.email }}</a></p>
     <p>Comment:<br>{{ request.comment | nl2br | safe }}</p>
+    <form action="/admin/delete-request/{{ request.request_id }}" method="GET">
+        <button>Delete Request</button>
+    </form>
 </section>
 <section>
     <h2>Other Links</h2>
     <ul>
-        <li><a href="/admin/delete-request/{{ request.request_id }}">Delete Request</a></li>
         <li><a href="/admin/requests">Go Back</a></li>
     </ul>
 </section>

@@ -79,6 +79,7 @@ Some of the key libraries that I used for this website include
 * [Bcypt](https://www.npmjs.com/package/bcrypt) - Used to encrypt passwords and compare hashes.
 * [Custom-env](https://github.com/erisanolasheni/custom-env) - A tool used to load the enviroment variables.
 * [Express](https://expressjs.com/) - The main web framework.
+* [Express MySQL Session](https://github.com/chill117/express-mysql-session) - Middleware to help save a session to the database.
 * [Express ReCaptcha](https://github.com/pdupavillon/express-recaptcha) - A tool to use to load Google's ReCaptcha on the page.
 * [Express Validator](https://express-validator.github.io/docs/) - Used to validate and sanitize user inputs.
 * [Express Session](http://expressjs.com/en/resources/middleware/session.html) - Used to make logging in possible.

@@ -35,10 +35,10 @@ router.post(
     isAuth,
     upload.single('image'),
     [
-        body('object').not().isEmpty().trim().escape(),
-        body('date').not().isEmpty().trim().escape(),
-        body('location').not().isEmpty().trim().escape(),
-        body('telescope').not().isEmpty().trim().escape(),
+        body('object').not().isEmpty().trim(),
+        body('date').not().isEmpty().trim(),
+        body('location').not().isEmpty().trim(),
+        body('telescope').not().isEmpty().trim(),
         body('comments').not().isEmpty().trim(),
     ],
     adminController.postAddImage
@@ -52,10 +52,10 @@ router.post(
     '/edit-image',
     isAuth,
     [
-        body('object').not().isEmpty().trim().escape(),
-        body('date').not().isEmpty().trim().escape(),
-        body('location').not().isEmpty().trim().escape(),
-        body('telescope').not().isEmpty().trim().escape(),
+        body('object').not().isEmpty().trim(),
+        body('date').not().isEmpty().trim(),
+        body('location').not().isEmpty().trim(),
+        body('telescope').not().isEmpty().trim(),
         body('comments').not().isEmpty().trim(),
     ],
     adminController.postEditImage
@@ -69,7 +69,7 @@ router.post(
     '/delete-image',
     isAuth,
     [
-        body('id').not().isEmpty().trim().escape(),
+        body('id').not().isEmpty().trim(),
     ],
     adminController.postDeleteImage
 );
@@ -88,7 +88,7 @@ router.post(
     '/delete-request',
     isAuth,
     [
-        body('id').not().isEmpty().trim().escape(),
+        body('id').not().isEmpty().trim(),
     ],
     adminController.postDeleteRequest
 );

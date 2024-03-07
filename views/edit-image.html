@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block endAddon %}
+<script src="/js/formButton.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <section>
     <h1>Edit an image</h1>
@@ -29,7 +33,7 @@
         </div>
         <input type="hidden" name="imageId" value="{{ image_id }}">
         <div>
-            <button>Edit Image</button>
+            <button id="sendForm" type="submit">Edit Image</button>
         </div>
     </form>
 </section>

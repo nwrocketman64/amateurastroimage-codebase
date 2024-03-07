@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block endAddon %}
+<script src="/js/formButton.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <section>
     <h1>Add an image</h1>
@@ -32,7 +36,7 @@
             <textarea name="comments" id="comments" rows="10" required>{% if comments %}{{ comments }}{% endif %}</textarea>
         </div>
         <div>
-            <button>Add Image</button>
+            <button id="sendForm" type="submit">Add Image</button>
         </div>
     </form>
 </section>

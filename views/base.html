@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - Amateur Astro Image</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital@1&family=Quicksand&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.classless.zinc.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.zinc.min.css">
     <link rel="stylesheet" href="/css/style.min.css">
     <link rel="shortcut icon" type="image/png" href="/img/favicon3.png">
     {% block addons %}{% endblock %}
 </head>
 <body>
-    <header>
+    <header class="container">
         <nav>
             <ul>
                 <li><a href="/" style="color: black;">Amateur Astro Image</a></li>
@@ -29,11 +29,12 @@
         {% block content %}
         {% endblock %}
     </main>
-    <footer>
+    <footer class="container">
         <small>
             This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. | <a href="https://github.com/nwrocketman64/amateurastroimage-codebase">GitHub</a> | <a href="/patch-notes">Patch Notes</a>
             <br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
         </small>
     </footer>
+    {% block endAddon %}{% endblock %}
 </body>
 </html>

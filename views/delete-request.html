@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block endAddon %}
+<script src="/js/formButton.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <section>
     <h1>Confirm to Delete Request</h1>
@@ -9,7 +13,7 @@
     <div class="selection">
     <form action="/admin/delete-request/" method="POST">
         <input type="hidden" name="id" value="{{ request.request_id }}">
-        <input type="submit" value="Yes">
+        <input id="sendForm" type="submit" value="Yes">
     </form>
     <form action="/admin" method="GET">
         <input type="submit" value="No">

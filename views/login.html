@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block endAddon %}
+<script src="/js/formButton.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <section>
     <h1>Login</h1>
@@ -15,7 +19,7 @@
             <label for="password">Password: </label>
             <input type="password" id="password" name="password" required>
         </div>
-        <div><button type="submit">Login</button></div>
+        <button id="sendForm" type="submit">Login</button>
     </form>
 </section>
 {% endblock %}

@@ -90,7 +90,7 @@ Some of the key libraries that I used for this website include
 * [Nodemon](https://nodemon.io/) - Used in developing the web app as it restarts the app every time you make a change.
 * [Nunjucks](https://mozilla.github.io/nunjucks/) - The main templating engine used in the project.
 * [Nunjucks Date](https://www.npmjs.com/package/nunjucks-date) - Provides a date filter for the templating engine.
-* [Pico.css](https://picocss.com/) - The lightweight CSS framework that I used for the this website.
+* [Pico.css V2](https://picocss.com/) - The lightweight CSS framework that I used for the this website.
 * [Sharp](https://sharp.pixelplumbing.com/) - The library used to process the images when received.
 
 # Useful Websites
